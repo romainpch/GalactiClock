@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Setting constants
-c = 3.0e8
+lightspeed = 3.0e8
 eps_ap = 0.51
 
 def plotLength(x1,y1,x2,y2, label, side, color ="black") :
@@ -42,7 +42,7 @@ class Horn() :
 
     def test_frequency(self) :
         lambda_c = 2*self.a 
-        nu_c = c/lambda_c
+        nu_c = lightspeed/lambda_c
         nu_min = 1.25*nu_c
         nu_max = 1.9*nu_c
         print("The horn frequency limits are : ", round(nu_min*1.e-6,2), "Mhz < nu < ",  round(nu_max*1.e-6,2), "Mhz")
@@ -114,14 +114,13 @@ class Horn() :
 
 #Wave caracteristics
 freq_wave = 1.4204e9
-wavelength = c/freq_wave
+wavelength = lightspeed/freq_wave
 
 #Parameters of the horn (in m)
 a = 16.3e-2
 b = 10.5e-2
 c = 15.0e-2
 A = 49e-2
-print(c)
 
 Galacticlock = Horn(A,a,b,c)
 Galacticlock.test_frequency()
