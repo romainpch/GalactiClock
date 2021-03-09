@@ -35,8 +35,8 @@ class Horn() :
     def compute_carac(self) :
         self.B = 0.5*(self.b + sqrt(self.b**2 + 8/3*self.A*(self.A-self.a)))
         self.R_H = self.A*(self.A-self.a)/(3*wavelength)
-        self.L_A = sqrt(self.R_H**2 + (self.B-self.b)**2)
-        self.L_B = sqrt(self.R_H**2 + (self.A-self.a)**2)
+        self.L_A = sqrt(self.R_H**2 + ((self.B-self.b)/2)**2)
+        self.L_B = sqrt(self.R_H**2 + ((self.A-self.a)/2)**2)
 
         self.Gain = 10*log10(4*pi*eps_ap*self.A*self.B/pow(wavelength,2))
 
@@ -81,7 +81,7 @@ class Horn() :
         x_trapeze_A = np.array([0, 0, self.L_A, self.L_A, 0])*100
         y_trapeze_A = np.array([0, self.A, (self.A + self.a)/2, (self.A - self.a)/2, 0])*100
         plt.plot(x_trapeze_A, y_trapeze_A, color=color_A, label="Planck A")
-        plotLength(2,0, 2, 100*self.A, str(100*self.A), "East", color_A)
+        plotLength(2,0, 2, 100*self.A, str(round(100*self.A,1)), "East", color_A)
         plotLength(100*self.L_A-2, 100*(self.A - self.a)/2, 100*self.L_A-2, 100*(self.A + self.a)/2, str(100*self.a), "West", color_A)
         plotLength(0, -8, 100*self.L_A, -8, str(round(100*self.L_A,1)), "South", color_A)
 
@@ -120,7 +120,7 @@ wavelength = lightspeed/freq_wave
 a = 16.3e-2
 b = 10.5e-2
 c = 15.0e-2
-A = 49e-2
+A = 56.6e-2
 
 Galacticlock = Horn(A,a,b,c)
 Galacticlock.test_frequency()
